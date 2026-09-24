@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Build and run TypeSafe AI Choice, Noul and Score requests from plain text and forms using a local service.">
+  <title>Jev Decision Lab</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to request editor</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="./" aria-label="Jev Decision Lab home"><span class="brand-mark" aria-hidden="true">J</span><span>Jev <span class="brand-light">/ Decision Lab</span></span></a>
+      <div class="topbar-right"><span class="local-label" id="deployment-label">LOCAL WORKSPACE</span><label class="language-control" for="language-select"><span class="sr-only">Interface language</span><select id="language-select" aria-label="Interface language" data-edit><option value="en" selected>English</option><option value="zh">Chinese (Simplified)</option></select></label><a href="https://docs.typesafe.ai/api" target="_blank" rel="noreferrer">API docs <span aria-hidden="true">↗</span></a></div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="page-heading">
+      <div><p class="eyebrow">SYSTEM ONE PLAYGROUND</p><h1>Request playground<span class="version-tag">v1</span></h1><p class="intro">One input, three judgments. Build requests and inspect real responses.</p></div>
+      <div class="service-badge" id="health-status" role="status">Connecting to service</div>
+    </div>
+
+    <div id="server-warning" class="notice warning" hidden>The service is unavailable. Try again or contact the operator. For local use, run <code>node server.mjs</code>, then visit <a href="http://127.0.0.1:8787">http://127.0.0.1:8787</a>.</div>
+    <noscript><div class="notice warning">JavaScript is required to build and send requests.</div></noscript>
+
+    <section class="connection panel" aria-labelledby="connection-title">
+      <div class="connection-copy"><span class="step-label">01 / SERVICE</span><h2 id="connection-title">Service status</h2><p>The deployer provides the model service</p></div>
+      <div class="connection-main">
+        <div class="service-connection"><div><strong>Enter content and run a judgment</strong><p>No personal API key required</p></div><button id="check-service" class="button button-outline" type="button">Check again</button></div>
+        <p id="connection-status" class="field-help" role="status">Checking the model service…</p>
+        <p class="field-help"><a href="./privacy.html" target="_blank" rel="noreferrer">How data is handled ↗</a></p>
+      </div>
+    </section>
+
+    <div class="run-bar">
+      <div><p id="run-status" role="status" aria-live="polite">Checking the service. You can run once it is ready.</p><p class="muted">Real requests · 60-second timeout per request · results matched by question ID</p></div>
+      <div class="run-actions"><button id="cancel-button" class="button button-outline" type="button" hidden>Cancel requests</button><button id="run-all" class="button button-primary" type="button"><span aria-hidden="true">▶</span> Run all 3 questions</button></div>
+    </div>
+    <div class="notice error" id="form-error" role="alert" hidden></div>
+
+    <div class="workspace" id="workspace">
+      <section class="panel state-panel" aria-labelledby="state-title">
+        <div class="panel-heading"><div><span class="step-label">02 / INPUT</span><h2 id="state-title">Shared input <span class="code-label">state</span></h2></div><span class="small-tag">Used by all 3 questions</span></div>
+        <div class="state-body">
+          <div class="form-row"><label for="scenario-select">Judgment template</label><div class="inline-controls"><select id="scenario-select" data-edit></select><button class="button button-outline button-small" id="load-example" type="button" data-edit>Apply</button></div></div>
+          <div class="template-info" id="template-info"><strong id="template-title"></strong><p id="template-summary"></p><div class="template-judgments"><span><b>Choice</b> <span id="template-choice"></span></span><span><b>Noul</b> <span id="template-noul"></span></span><span><b>Score</b> <span id="template-score"></span></span></div></div>
+          <div class="field-heading"><label for="state-input">Paste the content to evaluate</label><span class="small-tag">Plain text input</span></div>
+          <textarea id="state-input" class="state-input" rows="15" placeholder="Paste a proposal, article or description. Markdown, code, quotes and line breaks are fine; no JSON required." spellcheck="false" aria-describedby="state-help" data-edit></textarea>
+          <div class="editor-foot"><span id="state-count">0 characters</span><button class="text-button" id="load-proposal" type="button" data-edit>Load fictional proposal sample</button></div>
+          <p class="field-help" id="state-help">The text is sent as written. Applying the project template keeps your existing text.</p>
+          <div class="state-settings">
+            <label class="form-row" for="model-input">Model <input id="model-input" value="jev-latest" list="model-list" spellcheck="false" maxlength="128" data-edit><datalist id="model-list"><option value="jev-latest"></option><option value="jev-preview"></option></datalist></label>
+            <label class="form-row" for="run-mode">How to send all questions<select id="run-mode" data-edit><option value="batch">Combine into 1 request · recommended</option><option value="parallel">3 independent requests · concurrent</option></select></label>
+            <p class="field-help" id="mode-description">Send the state once; TypeSafe evaluates the three questions in parallel.</p>
+            <label class="check-label"><input id="auto-retry" type="checkbox" checked data-edit> Retry rate limits or overload up to 2 times</label>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel question-panel" aria-labelledby="question-title">
+        <div class="panel-heading"><div><span class="step-label">03 / QUESTIONS</span><h2 id="question-title">Build judgment questions</h2></div><button id="reset-question" class="text-button" type="button" data-edit>Reset current question</button></div>
+        <div class="question-tabs" role="tablist" aria-label="Question types">
+          <button id="tab-choice" role="tab" aria-selected="true" aria-controls="question-editor" data-type="choice" tabindex="0"><span class="type-symbol choice-symbol" aria-hidden="true">↳</span><span><strong>Choice</strong><small>Choose one option</small></span></button>
+          <button id="tab-noul" role="tab" aria-selected="false" aria-controls="question-editor" data-type="noul" tabindex="-1"><span class="type-symbol noul-symbol" aria-hidden="true">±</span><span><strong>Noul</strong><small>Judge whether a condition holds</small></span></button>
+          <button id="tab-score" role="tab" aria-selected="false" aria-controls="question-editor" data-type="score" tabindex="-1"><span class="type-symbol score-symbol" aria-hidden="true">≋</span><span><strong>Score</strong><small>Score on ordered levels</small></span></button>
+        </div>
+        <div class="question-editor" id="question-editor" role="tabpanel" aria-labelledby="tab-choice">
+          <div class="type-note"><p id="type-caption">Choose one defined option and return the choice, distribution and confidence.</p><a id="type-doc" href="https://docs.typesafe.ai/primitives/choice" target="_blank" rel="noreferrer">Primitive guide ↗</a></div>
+          <label class="form-row" for="question-id">Question ID <span class="label-aside">Matches the response; not sent to the model</span><input id="question-id" spellcheck="false" maxlength="96" data-edit></label>
+          <div class="field-heading"><label for="instructions-input">Instructions <span class="code-label">instructions</span></label><select id="instructions-format" class="compact-select" aria-label="Instructions format" data-edit><option value="text">Plain text</option><option value="json">JSON</option></select></div>
+          <textarea id="instructions-input" rows="3" spellcheck="false" data-edit></textarea>
+          <div class="field-heading criteria-heading"><span id="criteria-title">Criteria</span><select id="criteria-mode" class="compact-select" aria-label="Criteria editor mode" data-edit><option value="form">Form</option><option value="json">JSON · advanced</option></select></div>
+          <div id="criteria-fields" class="criteria-fields" role="group" aria-labelledby="criteria-title" tabindex="-1"></div>
+          <button id="add-criterion" class="button button-small button-outline" type="button" data-edit>Add option</button>
+          <div id="criteria-json-editor" hidden><label class="sr-only" for="criteria-input">Advanced criteria JSON</label><textarea id="criteria-input" class="code-input criteria-input" rows="8" spellcheck="false" aria-describedby="criteria-description" data-edit></textarea><div class="editor-foot"><span>Use only when structured descriptions are needed</span><button class="text-button" id="format-criteria" type="button" data-edit>Format JSON</button></div></div>
+          <p class="field-help" id="criteria-description">Enter options and descriptions; the page builds the request.</p>
+          <div class="question-bottom"><p id="question-hint">Cover likely answers and include an other option where needed.</p><button class="button button-outline" id="run-current" type="button">Run Choice only <span aria-hidden="true">↗</span></button></div>
+        </div>
+      </section>
+    </div>
+
+    <details class="panel json-details" id="request-details">
+      <summary><span>Request JSON <span class="code-label">POST /v1/systemone</span></span><span class="summary-hint">Inspect the actual request body</span></summary>
+      <div class="json-toolbar"><label for="preview-scope">Preview<select id="preview-scope"><option value="batch">Combined request</option><option value="parallel">Three separate requests</option><option value="current">Current type</option></select></label><button id="copy-request" class="button button-small button-outline" type="button">Copy JSON</button></div>
+      <pre id="request-json" class="json-code" tabindex="0" aria-label="Request JSON preview"></pre>
+    </details>
+
+    <section class="results-section" aria-labelledby="results-title">
+      <div class="results-heading"><div><p class="step-label">04 / RESPONSE</p><h2 id="results-title">Results</h2></div><span id="results-status" class="small-tag">Waiting for first request</span></div>
+      <p class="assessment-note">Jev returns typed judgments and probabilities from your supplied content. It does not independently verify external links or execute actions.</p>
+      <div class="metrics"><div><span>Total elapsed time</span><strong id="metric-latency">—</strong></div><div><span>Token usage · input / output</span><strong id="metric-tokens">—</strong></div><div><span>Returned model</span><strong id="metric-model">—</strong></div></div>
+      <div class="results-grid">
+        <article class="panel result-card" data-result="choice" aria-labelledby="choice-result-title"><header><h3 id="choice-result-title"><span class="type-symbol choice-symbol" aria-hidden="true">↳</span>Choice</h3><span class="result-badge" id="choice-status">Not run</span></header><div id="choice-content" class="result-content" aria-live="polite"></div></article>
+        <article class="panel result-card" data-result="noul" aria-labelledby="noul-result-title"><header><h3 id="noul-result-title"><span class="type-symbol noul-symbol" aria-hidden="true">±</span>Noul</h3><span class="result-badge" id="noul-status">Not run</span></header><div id="noul-content" class="result-content" aria-live="polite"></div></article>
+        <article class="panel result-card" data-result="score" aria-labelledby="score-result-title"><header><h3 id="score-result-title"><span class="type-symbol score-symbol" aria-hidden="true">≋</span>Score</h3><span class="result-badge" id="score-status">Not run</span></header><div id="score-content" class="result-content" aria-live="polite"></div></article>
+      </div>
+      <details class="panel json-details" id="response-details"><summary><span>Raw response <span class="code-label">JSON / HTTP</span></span><span class="summary-hint">Includes error details and retry records</span></summary><div class="json-toolbar"><span id="response-count">No response yet</span><div class="inline-controls"><button id="copy-response" class="button button-small button-outline" type="button" disabled>Copy</button><button id="export-results" class="button button-small button-outline" type="button" disabled>Download JSON</button></div></div><pre id="response-json" class="json-code" tabindex="0" aria-label="Raw response">The real response will appear here after a request runs.</pre></details>
+    </section>
+
+    <footer><span>Jev Decision Lab <span class="footer-separator">/</span> Unofficial open-source tool</span><div><a href="./privacy.html" target="_blank" rel="noreferrer">Data handling ↗</a><a href="https://docs.typesafe.ai/concepts/how-to-build-with-system-one" target="_blank" rel="noreferrer">Guide ↗</a><a href="https://docs.typesafe.ai/confidence" target="_blank" rel="noreferrer">Understanding confidence ↗</a><a href="https://github.com/Hiwoniu/Jev-Case" target="_blank" rel="noreferrer">Community examples ↗</a></div></footer>
+  </main>
+  <div class="toast" id="toast" role="status" hidden></div>
+</body>
+</html>

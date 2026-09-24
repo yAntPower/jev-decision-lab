@@ -1,0 +1,21 @@
+{
+  "name": "jev-decision-lab",
+  "version": "1.6.0",
+  "private": true,
+  "type": "module",
+  "description": "A self-hosted, bilingual playground for TypeSafe Jev judgments.",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/yAntPower/jev-decision-lab.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test test/*.test.mjs",
+    "check": "node --check server.mjs && node --check dist/core.js && node --check dist/presets.js && node --check dist/i18n.js && node --check dist/privacy.js && node --check dist/app.js && node --check scripts/package-release.mjs",
+    "package": "node scripts/package-release.mjs"
+  }
+}

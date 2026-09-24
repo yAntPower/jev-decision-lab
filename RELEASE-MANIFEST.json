@@ -1,0 +1,134 @@
+{
+  "name": "jev-decision-lab",
+  "version": "1.6.0",
+  "files": [
+    {
+      "name": ".gitignore",
+      "sha256": "02fae9f85a519ed12d1a690022a98c092c4eb28ffe213d5ecff63868773702f7"
+    },
+    {
+      "name": ".github/workflows/ci.yml",
+      "sha256": "5325fd54433bb36b0fb30abd6f72247ff0af6f4b4e137a23c9caf6a375dd9f34"
+    },
+    {
+      "name": "LICENSE",
+      "sha256": "d671909ba8482172123827f7b91562f7bed870c4da7a6fdaa5861f3e3155ba66"
+    },
+    {
+      "name": "README.md",
+      "sha256": "ed0c8f0380f12aec3761276be70fe34d5d98b07a5cbe107732e756c4a53fa1e2"
+    },
+    {
+      "name": "README.zh-CN.md",
+      "sha256": "80c6a4c41721de03c52cd3e68cf53f60c138cfdca8073fea435c1cf7b929bff5"
+    },
+    {
+      "name": "CONTRIBUTING.md",
+      "sha256": "025dd25c4ed8d1be5f2e5ffbb630c8aba5fb3fd4cd630cce614a0cf9f729980f"
+    },
+    {
+      "name": "SECURITY.md",
+      "sha256": "8040e61e20f46f950a8fe8be419fd9172c3ef4076b99e42d4f3bfc6656408d4e"
+    },
+    {
+      "name": "CODE_OF_CONDUCT.md",
+      "sha256": "980d6cb435dcc3223cf13e1a1fdcc61594d11be322a2c9374cfae4bfa2bf09f6"
+    },
+    {
+      "name": "package.json",
+      "sha256": "0e6994aefa166b7abf358359db72493b50061643368a36b235057ad623a66147"
+    },
+    {
+      "name": "server.mjs",
+      "sha256": "e37612c53a774ffb0d2c36a496652129d74bb860a6c7fb732f354955cf936ce7"
+    },
+    {
+      "name": "docs/typesafe-guide.md",
+      "sha256": "e87bc0149688f61783678c9f0274a9ad236779c44643789061781acfd18f3feb"
+    },
+    {
+      "name": "docs/templates.md",
+      "sha256": "65a69265e6860eaa55d79b8275c65d41290819a083f065e34de6edb47fdd2201"
+    },
+    {
+      "name": "docs/deployment.md",
+      "sha256": "492ff71bada91437bfbff144a1c6a190ce24fab1641b335c1f138c78af9a82ae"
+    },
+    {
+      "name": "docs/deployment.en.md",
+      "sha256": "3973ea44bd0708211a9d4126ed3878b3dca3413927cbb9604a054660f0ccbe93"
+    },
+    {
+      "name": "docs/roadmap.md",
+      "sha256": "ffa027c820631f3df2c5dc6011528ab00ede0ba62969ba4f18858666bccbfe77"
+    },
+    {
+      "name": "dist/index.html",
+      "sha256": "cc752d51c5e49c51a8553289ae84e31fd7fd50add6b5e895e0642749a7ad1e8a"
+    },
+    {
+      "name": "dist/styles.css",
+      "sha256": "edf0aae849c30a623daa07f96e6cd45dad40b260fdf838ea788ee74ccb6436ee"
+    },
+    {
+      "name": "dist/app.js",
+      "sha256": "9a1a5d0fc451b4baedb505e20ac573541183685b30542b9110df7b715337b1f8"
+    },
+    {
+      "name": "dist/core.js",
+      "sha256": "ac610c36127df49a89de588faaf797db40d163d680b986d23df0000b63b94b48"
+    },
+    {
+      "name": "dist/presets.js",
+      "sha256": "fa2e56b617945c964a88b7c99830eef3009881eaf206e49fb24418f1f9115d0d"
+    },
+    {
+      "name": "dist/i18n.js",
+      "sha256": "6e342283e0206937a8160326a9e9dd8a36b306d2e16bb468e0c05832d749c5ee"
+    },
+    {
+      "name": "dist/favicon.svg",
+      "sha256": "4bdcce4da9df1b48c4c346359d24ff916fb2d5d23eb7c0c512bee89cd1c02154"
+    },
+    {
+      "name": "dist/privacy.html",
+      "sha256": "524d552606df4c2748757b812897534684e43ba14a248b6df947ba31266e2ea2"
+    },
+    {
+      "name": "dist/privacy.js",
+      "sha256": "0dd8d457248ac42b81daae5ee34a518f93ab4c444c8e274114e0a282851ceec5"
+    },
+    {
+      "name": "dist/examples/proposal.md",
+      "sha256": "da4bd2f573bfbaebc35c7dc4682cb4452c1c55accc8882ac9060a6d9ec3972ea"
+    },
+    {
+      "name": "dist/examples/proposal.en.md",
+      "sha256": "ee36fb5835fed53169c08247d51f5df3606e7dd9012ad8a8ef0108b7b6ca9eb1"
+    },
+    {
+      "name": "scripts/package-release.mjs",
+      "sha256": "b335bc82e0ab1a0f358dca8592836e7e0015f5f281d61f1a259f784cce4ae8e8"
+    },
+    {
+      "name": "scripts/release-files.mjs",
+      "sha256": "f0b4962850db2e2957512c15fd9905fccbcc6e8b42f5da4d24ac2d415074b1e9"
+    },
+    {
+      "name": "test/core.test.mjs",
+      "sha256": "c743298ee70329756fc604aec9fb1c453b2d7aa813b5b3e92a12c8044e99a4bd"
+    },
+    {
+      "name": "test/server.test.mjs",
+      "sha256": "154f0cc8ba0596fbfa716bec29cb20da1a797a937ffa87b084fdcc2434ca37e5"
+    },
+    {
+      "name": "test/release.test.mjs",
+      "sha256": "58e85d6e4b0885cca18db52921156eb39153a964137d82af9e3e06444e1ed6e7"
+    },
+    {
+      "name": "test/templates.test.mjs",
+      "sha256": "0af733d18325b8976580ef24873192fb26a58f9a2c34137e2cbf0e70a7ee36ee"
+    }
+  ]
+}

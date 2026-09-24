@@ -1,0 +1,18 @@
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+artifacts/
+release/
+.agents/
+.codex/
+.openai/
+# Only generic examples and release tooling belong in the public repository.
+dist/examples/*
+!dist/examples/proposal.md
+!dist/examples/proposal.en.md
+scripts/*
+!scripts/package-release.mjs
+!scripts/release-files.mjs

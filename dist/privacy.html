@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Data handling · Jev Decision Lab</title><link rel="stylesheet" href="./styles.css"><link rel="icon" href="./favicon.svg" type="image/svg+xml"><script type="module" src="./privacy.js"></script></head>
+<body><main class="page"><div class="page-heading"><div><h1 id="privacy-title">How data is handled</h1><p class="intro"><label for="privacy-language" id="privacy-language-label">Interface language</label> <select id="privacy-language" aria-label="Interface language"><option value="en" selected>English</option><option value="zh">Chinese (Simplified)</option></select></p></div><a id="privacy-back" href="./index.html">Back to playground</a></div>
+<section class="panel" id="chinese" hidden><div class="state-body privacy-content">
+<p>网页无需输入个人 API Key。模型服务由部署者配置，凭证只由本机 Node 服务用于调用 TypeSafe 官方 API，不返回到浏览器。</p>
+<p>页面没有 Key 输入或连接 / 断开操作，后端不提供用户 Key 会话。应用不使用认证 Cookie，不把服务凭证写入应用日志、磁盘、浏览器存储、请求预览或导出。部署者需要保护自己的运行环境。</p>
+<p>应用不持久保存正文、结果或调用历史；数据在处理期间存在于浏览器与服务进程内存中。仅语言偏好保存在浏览器 localStorage。复制、下载由使用者主动发起，刷新页面会丢失当前编辑内容与结果。</p>
+<p>检查服务时查询 TypeSafe 模型列表；运行与重试时向 TypeSafe 发送正文及问题。请求通过本机服务转发，不依赖官方允许网页跨域。取消不能保证已经开始的上游计算不计费。TypeSafe 的数据处理遵循其政策与账户协议。</p>
+<p>当前仅支持本机部署。未来公开版将由运营方提供平台 Key，用户通过 USDT 购买调用额度，无需个人 TypeSafe Key；公开访问控制与计费尚未实现。</p>
+</div></section><section class="panel" id="english"><div class="state-body privacy-content">
+<h2>Data handling</h2>
+<p>Page users never enter a personal API key. The deployer configures the model service. Only the local Node service uses its credential for the official TypeSafe API; it is not returned to the browser.</p>
+<p>There is no key input, connect/disconnect action or user key session. The application uses no authentication cookie and does not write service credentials to logs, disk, browser storage, request previews or exports. Deployers must protect their runtime environment.</p>
+<p>The application does not persist input, results or call history. Data exists in browser and service memory during processing. Only the language preference is stored in browser localStorage. Users explicitly initiate copying and downloads; refreshing the page loses current edits and results.</p>
+<p>Checking readiness queries TypeSafe's model list. Running or retrying sends your content and questions to TypeSafe through the local service without relying on browser CORS support. Cancellation cannot guarantee that accepted upstream work is not billed. TypeSafe processes data under its own policies and account terms.</p>
+<p>Only local deployment is currently supported. The planned public service uses an operator-owned platform key and USDT-funded access credits, without visitor TypeSafe keys. Public access control and billing are not yet implemented.</p>
+</div></section></main></body></html>
