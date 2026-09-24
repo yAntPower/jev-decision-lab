@@ -16,11 +16,11 @@
     },
     {
       "name": "README.md",
-      "sha256": "ed0c8f0380f12aec3761276be70fe34d5d98b07a5cbe107732e756c4a53fa1e2"
+      "sha256": "3a4ae060d60fedf32a7887de352a88248725faa8fd2ff3c1cc58ce78f2bf2fe7"
     },
     {
       "name": "README.zh-CN.md",
-      "sha256": "80c6a4c41721de03c52cd3e68cf53f60c138cfdca8073fea435c1cf7b929bff5"
+      "sha256": "6dcda801cace9943ee790be42f7c4d46a892577419fb8854f649865727c10378"
     },
     {
       "name": "CONTRIBUTING.md",
@@ -44,7 +44,7 @@
     },
     {
       "name": "docs/typesafe-guide.md",
-      "sha256": "e87bc0149688f61783678c9f0274a9ad236779c44643789061781acfd18f3feb"
+      "sha256": "a7a887bfb04efdbcf34fec91b07c120ee29ad6b340923060074a2cc814e048f5"
     },
     {
       "name": "docs/templates.md",
@@ -52,11 +52,11 @@
     },
     {
       "name": "docs/deployment.md",
-      "sha256": "492ff71bada91437bfbff144a1c6a190ce24fab1641b335c1f138c78af9a82ae"
+      "sha256": "204822aa9db24f1a5ee11ada22593e3434cf1ef07af3f92ff1f9187573e17e40"
     },
     {
       "name": "docs/deployment.en.md",
-      "sha256": "3973ea44bd0708211a9d4126ed3878b3dca3413927cbb9604a054660f0ccbe93"
+      "sha256": "0a7090b4d1271a1ec869fb1a9429c24b4d1c060f8e6cee3b4762ad14cfa12a02"
     },
     {
       "name": "docs/roadmap.md",
@@ -128,7 +128,7 @@
     },
     {
       "name": "test/templates.test.mjs",
-      "sha256": "0af733d18325b8976580ef24873192fb26a58f9a2c34137e2cbf0e70a7ee36ee"
+      "sha256": "15dc44c4ed758a7546aa9991bc179951f379f2349a54623fd55636ea311500a2"
     }
   ]
 }

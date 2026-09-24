@@ -1,5 +1,7 @@
 # Jev Decision Lab
 
+**English** · [简体中文](README.zh-CN.md)
+
 An unofficial open-source Jev playground. Paste plain text, configure Choice / Noul / Score with forms, make real requests and inspect probabilities, scores, timing, token usage and raw responses. Run one question, one combined request, or three concurrent requests.
 
 **Page users never enter an API key. The service uses a credential configured by the deployer on the server.** The current working release is HTML/CSS/JavaScript plus a dependency-free local Node.js service.
@@ -12,7 +14,7 @@ Install Node.js 22 or later. The deployer configures `TYPESAFE_API_KEY` in the s
 npm start
 ~~~
 
-No `npm install` or build is needed. Open **http://127.0.0.1:8787**; the page checks the service automatically. Press Ctrl+C to stop. If the environment variable is already configured, no further key entry or copying is needed. See the [deployment guide](docs/deployment.en.md) for first-time setup.
+No `npm install` or build is needed. Open `http://127.0.0.1:8787`; the page checks the service automatically. Press Ctrl+C to stop. If the environment variable is already configured, no further key entry or copying is needed. See the [deployment guide](docs/deployment.en.md) for first-time setup.
 
 If the variable is initialized only in interactive Bash, start from that configured terminal or use:
 
@@ -31,8 +33,6 @@ For another port, use `PORT=8788 npm start` on Linux/macOS, or first set `$env:P
 3. Edit questions, options and score levels. Advanced JSON editing is optional.
 4. Run one question type, or all three in combined/concurrent mode.
 5. Inspect, copy or download results.
-
-**Language: English · [简体中文](README.zh-CN.md)**
 
 Use the top-right control to switch between English and Simplified Chinese. All fixed interface text, 12 judgment templates and the fictional proposal sample have both language versions. The templates cover project validation, support and bug triage, model and tool routing, an agent's next step, RAG passage selection, citation support, candidate-value selection, release changes, input guarding and documentation changes. Switching languages translates untouched sample fields while preserving edited content, questions and criteria. Choice / Noul / Score have separate judgments in each template; see the [template guide](docs/templates.md).
 
@@ -62,6 +62,8 @@ npm run package
 Tests use fake credentials and mocked APIs without reading real environment keys. They cover calls without visitor credentials, removal of old key endpoints, all three question types, concurrency, partial failures, errors, timeouts, cancellation, private file isolation and release packaging.
 
 `npm run package` creates a clean source directory with SHA-256 hashes. Only explicitly allowlisted public files are copied; environment files and private reports are not read. Create public repositories from that generated directory, not the entire working directory.
+
+The generated `RELEASE-MANIFEST.json` lists the package name, version and SHA-256 hash of each copied file. It is an inventory for checking package integrity, not runtime configuration or a place for credentials.
 
 Code is [MIT licensed](LICENSE). See [Contributing](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md), and [Security](SECURITY.md). This project is not affiliated with TypeSafe AI. TypeSafe services, models and trademarks are not covered by this license. `private: true` only prevents accidental npm publication.
 

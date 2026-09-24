@@ -48,7 +48,7 @@ Choice 和 Score 的 confidence 概括概率分布的集中程度，不是最终
 
 本项目的 1 MB 请求体限制、三个问题编辑器、60 秒上游超时和最多两次重试均是本工具的设计选择，不是 TypeSafe API 的全部能力或官方统一限制。模型的限制与配额以官方文档及账户为准。
 
-当前使用本地 Node 服务调用官方 API，浏览器仅访问同源的本机接口，不依赖 TypeSafe 允许网页跨域。凭证仅由部署者通过 TYPESAFE_API_KEY 配置，页面不提供个人 Key 输入，后端不接收用户 Key 会话。公开版计划使用平台 Key 与 USDT 调用额度，访问控制和计费尚未实现。详见 [中文部署指南](deployment.md) / [English](deployment.en.md)。
+当前使用本地 Node 服务调用官方 API，浏览器仅访问同源的本机接口，不依赖 TypeSafe 允许网页跨域。凭证仅由部署者通过 `TYPESAFE_API_KEY` 配置，页面不提供个人 Key 输入，后端不接收用户 Key 会话。公开版计划使用平台 Key 与 USDT 调用额度，访问控制和计费尚未实现。详见 [中文部署指南](deployment.md) / [English](deployment.en.md)。
 
 ## 可行性评估模板
 
@@ -60,4 +60,4 @@ Noul 的概率是模型对当前命题的判断，不是创业成功率。Score 
 
 新增的 12 个模板分别给 Choice、Noul 和 Score 提供具体问题与不同的判断边界。问题同时发送时彼此独立，因此每个问题都从同一份 State 单独得出结论，不引用另一个问题的结果。Choice 用于选择类别或下一步，Noul 用于一个明确的是否命题，Score 用于有序等级，不把三个数值混成一个“综合正确率”。
 
-方向参考 [TypeSafe 官方用例地图](https://docs.typesafe.ai/concepts/use-case-map)、[RAG 分类实践](https://docs.typesafe.ai/cookbooks/rag_classification)与社区 [Jev-Case](https://github.com/Hiwoniu/Jev-Case) 的主题索引。Jev-Case 收集了开发者发布的应用案例，不是可以原样复制的 API 模板；本项目的模板、样例、标签和等级为本项目独立编写。完整中英双语目录见[模板指南](templates.md)。
+方向参考 [TypeSafe 官方用例地图](https://docs.typesafe.ai/concepts/use-case-map)、[RAG 分类实践](https://docs.typesafe.ai/cookbooks/rag_classification) 与社区 [Jev-Case](https://github.com/Hiwoniu/Jev-Case) 的主题索引。Jev-Case 收集了开发者发布的应用案例，不是可以原样复制的 API 模板；本项目的模板、样例、标签和等级为本项目独立编写。完整中英双语目录见 [模板指南](templates.md)。

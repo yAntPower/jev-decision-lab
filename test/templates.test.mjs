@@ -56,15 +56,15 @@ test("English is the source-page default and Chinese remains selectable", async 
   const html = await readFile(new URL("../dist/index.html", import.meta.url), "utf8");
   const privacy = await readFile(new URL("../dist/privacy.html", import.meta.url), "utf8");
   const readme = await readFile(new URL("../README.md", import.meta.url), "utf8");
+  const readmeZh = await readFile(new URL("../README.zh-CN.md", import.meta.url), "utf8");
   assert.match(html, /<html lang="en">/);
   assert.match(html, /<option value="en" selected>English<\/option>/);
   assert.match(html, /<option value="zh">Chinese \(Simplified\)<\/option>/);
   assert.doesNotMatch(html, /[\p{Script=Han}]/u);
   assert.match(privacy, /<html lang="en">/);
   assert.match(privacy, /<section class="panel" id="chinese" hidden>/);
-  assert.ok(readme.startsWith("# Jev Decision Lab\n"));
-  assert.ok(readme.indexOf("[简体中文](README.zh-CN.md)") > readme.indexOf("## Use"));
-  assert.ok(readme.indexOf("[简体中文](README.zh-CN.md)") < readme.indexOf("## Two usage scenarios"));
+  assert.match(readme, /^# Jev Decision Lab\n\n\*\*English\*\* · \[简体中文\]\(README\.zh-CN\.md\)\n\n/);
+  assert.match(readmeZh, /^# Jev Decision Lab\n\n\[English\]\(README\.md\) · \*\*简体中文\*\*\n\n/);
   assert.equal(getLocale(), "en");
   setLocale("zh");
   assert.equal(getLocale(), "zh");

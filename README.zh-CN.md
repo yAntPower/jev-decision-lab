@@ -1,5 +1,7 @@
 # Jev Decision Lab
 
+[English](README.md) · **简体中文**
+
 非官方开源 Jev 请求实验室。粘贴普通文本，用表单配置 Choice / Noul / Score，发送真实请求并查看概率、评分、耗时、Token 用量和原始响应。支持单问题、合并请求和三个独立请求并发。
 
 **页面无需输入 API Key。模型服务统一使用部署者在服务端配置的凭证。** 当前可运行版本是 HTML/CSS/JavaScript 页面 + 零第三方依赖的 Node.js 本机服务。
@@ -12,7 +14,7 @@
 npm start
 ~~~
 
-无需 `npm install` 或构建。打开 **http://127.0.0.1:8787**，页面自动检查服务；终端按 Ctrl+C 停止。环境变量已经配置时无需再次输入或复制 Key。首次部署的配置方法见 [部署指南](docs/deployment.md)。
+无需 `npm install` 或构建。打开 `http://127.0.0.1:8787`，页面自动检查服务；终端按 Ctrl+C 停止。环境变量已经配置时无需再次输入或复制 Key。首次部署的配置方法见 [部署指南](docs/deployment.md)。
 
 如果变量只在交互式 Bash 中初始化，可从已配置的终端启动，或执行：
 
@@ -32,9 +34,7 @@ bash -ic 'exec node server.mjs'
 4. 单独运行一种问题，或合并 / 并发运行全部三种问题。
 5. 查看、复制或下载结果。
 
-**语言：简体中文 · [English](README.md)**
-
-页面右上角可切换简体中文 / English；固定文字、12 个评估模板和虚构方案示例均有对应语言版本。模板涵盖项目验证、客服与故障分诊、模型与工具路由、Agent 下一步、RAG 片段、引文核查、候选值选择、发布变更、输入守卫和文档变更。切换语言时，未改动的示例字段随之翻译，已编辑的正文、问题和标准保留原文。各模板的 Choice / Noul / Score 针对不同判断分别定义，见[模板指南](docs/templates.md)。
+页面右上角可切换简体中文 / English；固定文字、12 个评估模板和虚构方案示例均有对应语言版本。模板涵盖项目验证、客服与故障分诊、模型与工具路由、Agent 下一步、RAG 片段、引文核查、候选值选择、发布变更、输入守卫和文档变更。切换语言时，未改动的示例字段随之翻译，已编辑的正文、问题和标准保留原文。各模板的 Choice / Noul / Score 针对不同判断分别定义，见 [模板指南](docs/templates.md)。
 
 模型对材料的判断不是事实核实、发布许可或真实成功率。私人方案、真实评估记录和个人分析脚本均排除在开源源码包之外。
 
@@ -63,6 +63,8 @@ npm run package
 
 `npm run package` 生成干净的源码目录，附 SHA-256 文件清单。只复制明确列出的公开文件，不读取环境文件和私人报告。请用生成的目录建立公开仓库，不要直接上传整个工作目录。
 
-代码采用 [MIT 许可证](LICENSE)。参阅[贡献指南](CONTRIBUTING.md)、[行为准则](CODE_OF_CONDUCT.md)和[安全说明](SECURITY.md)。项目与 TypeSafe AI 无官方隶属关系。TypeSafe 的服务、模型与商标不包含在本许可证中。`private: true` 仅防止意外发布到 npm。
+生成的 `RELEASE-MANIFEST.json` 列出项目名称、版本及每个公开文件的 SHA-256 哈希值，方便核对源码包是否完整、文件是否被改动。它不是运行配置，也不存放 API Key。
+
+代码采用 [MIT 许可证](LICENSE)。参阅 [贡献指南](CONTRIBUTING.md)、[行为准则](CODE_OF_CONDUCT.md) 和 [安全说明](SECURITY.md)。项目与 TypeSafe AI 无官方隶属关系。TypeSafe 的服务、模型与商标不包含在本许可证中。`private: true` 仅防止意外发布到 npm。
 
 [中文部署指南](docs/deployment.md) · [English deployment guide](docs/deployment.en.md) · [中英双语模板指南](docs/templates.md) · [官方指南笔记](docs/typesafe-guide.md) · [产品规划](docs/roadmap.md)

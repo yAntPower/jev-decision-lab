@@ -38,7 +38,7 @@ npm start
 
 These commands configure only the current terminal's environment and do not create configuration files. Restart after changing environment variables.
 
-Open **http://127.0.0.1:8787**. The page checks the service and loads models automatically. Once ready, enter your text and questions. Missing configuration shows a setup status; invalid configuration shows a connection error. Neither opens an API-key prompt.
+Open `http://127.0.0.1:8787`. The page checks the service and loads models automatically. Once ready, enter your text and questions. Missing configuration shows a setup status; invalid configuration shows a connection error. Neither opens an API-key prompt.
 
 ## Network and data
 
