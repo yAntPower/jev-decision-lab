@@ -27,6 +27,7 @@
 @media(max-width:520px) { .service-connection { align-items:stretch; flex-direction:column; } .criterion-heading { flex-wrap:wrap; } .criterion-key-label { font-size:.75rem; } }
 .privacy-content{max-width:920px;line-height:1.85}.privacy-content p+p{margin-top:16px}.privacy-content a{overflow-wrap:anywhere}
 /* Language switch and template rationale. */
+.template-controls{flex-wrap:wrap}.template-controls select{flex:1 1 170px}
 .language-control select{min-height:35px;padding:5px 24px 5px 10px;background:#243940;color:#ecf5f0;border-color:#4a6168;font-size:.8125rem}
 .template-info{width:100%;background:#f7faf8;border:1px solid #dce9de;border-radius:8px;padding:12px 14px;margin:-4px 0 16px;font-size:.8125rem;color:#49605c}
 .template-info strong{display:block;color:#263d37;font-size:.875rem}.template-info p{margin:3px 0 8px}.template-judgments{display:flex;flex-direction:column;gap:3px}.template-judgments b{display:inline-block;min-width:52px;color:#334b45}

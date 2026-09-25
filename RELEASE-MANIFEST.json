@@ -16,11 +16,11 @@
     },
     {
       "name": "README.md",
-      "sha256": "3a4ae060d60fedf32a7887de352a88248725faa8fd2ff3c1cc58ce78f2bf2fe7"
+      "sha256": "ebb7fe1fa26e8db27f76e645d39d5eb77b8e3af8e307eb9efbd92a58106a9642"
     },
     {
       "name": "README.zh-CN.md",
-      "sha256": "6dcda801cace9943ee790be42f7c4d46a892577419fb8854f649865727c10378"
+      "sha256": "3b9a71ccf4e8fadc915889259a1f566ac817b795792eff2d6a911050a92a7e53"
     },
     {
       "name": "CONTRIBUTING.md",
@@ -48,7 +48,7 @@
     },
     {
       "name": "docs/templates.md",
-      "sha256": "65a69265e6860eaa55d79b8275c65d41290819a083f065e34de6edb47fdd2201"
+      "sha256": "2d2264a02efbd44695535b85d608a8db8f45e2e514db7d5b3b11afa05f179343"
     },
     {
       "name": "docs/deployment.md",
@@ -64,15 +64,15 @@
     },
     {
       "name": "dist/index.html",
-      "sha256": "cc752d51c5e49c51a8553289ae84e31fd7fd50add6b5e895e0642749a7ad1e8a"
+      "sha256": "f297541319cdc5d191e4e1c9d2b27dd5b06f27767889bd83f7b9a8dbbc3f20da"
     },
     {
       "name": "dist/styles.css",
-      "sha256": "edf0aae849c30a623daa07f96e6cd45dad40b260fdf838ea788ee74ccb6436ee"
+      "sha256": "ba310a280e794772e85fdd2aa80cdb67bbed48d0476a666d77d91b4cfed1308c"
     },
     {
       "name": "dist/app.js",
-      "sha256": "9a1a5d0fc451b4baedb505e20ac573541183685b30542b9110df7b715337b1f8"
+      "sha256": "bf623fd49170de3e9c4243de0ecb37cc912f97cb9c819a1103e072eb1c01fa6b"
     },
     {
       "name": "dist/core.js",
@@ -80,11 +80,11 @@
     },
     {
       "name": "dist/presets.js",
-      "sha256": "fa2e56b617945c964a88b7c99830eef3009881eaf206e49fb24418f1f9115d0d"
+      "sha256": "a68f81850a6858c314aa0d1dd2016570ac064ca7bf3ec4119483e96965daa0cc"
     },
     {
       "name": "dist/i18n.js",
-      "sha256": "6e342283e0206937a8160326a9e9dd8a36b306d2e16bb468e0c05832d749c5ee"
+      "sha256": "d7d6cc31f16af664965349482fabf34e819f06219f0781c7ae026a919f945325"
     },
     {
       "name": "dist/favicon.svg",
@@ -128,7 +128,7 @@
     },
     {
       "name": "test/templates.test.mjs",
-      "sha256": "15dc44c4ed758a7546aa9991bc179951f379f2349a54623fd55636ea311500a2"
+      "sha256": "c9836219888e64f2b24bb03e4fa927f52e725268788957a07e03ec6f75be80c1"
     }
   ]
 }

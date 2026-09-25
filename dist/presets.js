@@ -258,13 +258,33 @@ const catalog = {
   },
 };
 
+function blankDrafts() {
+  const base = (id, rows) => ({ id, instructions: "", format: "text", criteriaMode: "form", criteria: "", rows });
+  return {
+    choice: base("custom_choice", [{ key: "", description: "" }, { key: "", description: "" }]),
+    noul: base("custom_noul", [{ key: "true", description: "" }, { key: "false", description: "" }]),
+    score: base("custom_score", [{ key: "0", description: "" }, { key: "1", description: "" }]),
+  };
+}
+
 export const TEMPLATE_ORDER = Object.freeze(Object.keys(catalog));
-export const TEMPLATES = Object.fromEntries(Object.entries(catalog).map(([id, languages]) => [id, Object.fromEntries(Object.entries(languages).map(([language, value]) => [language, {
+export const TEMPLATES = {
+  custom: {
+    zh: { title: "自定义评估", summary: "从空白问题开始。保留你写的正文，清除未修改的示例；可只运行一种判断。", state: "", drafts: blankDrafts() },
+    en: { title: "Custom judgment", summary: "Start with blank questions. Keep your own text, clear untouched samples, and run one judgment type if you wish.", state: "", drafts: blankDrafts() },
+  },
+  ...Object.fromEntries(Object.entries(catalog).map(([id, languages]) => [id, Object.fromEntries(Object.entries(languages).map(([language, value]) => [language, {
   title: value.title,
   summary: value.summary,
   state: value.state,
   drafts: Object.fromEntries(Object.entries(value.questions).map(([type, question]) => [type, draft(type, question)])),
-}]))]));
+}]))])),
+};
+
+export function stateForCustom(templateId, language, state, proposalText = null) {
+  const sample = TEMPLATES[templateId]?.[language]?.state;
+  return (sample && state === sample) || (proposalText !== null && state === proposalText) ? "" : state;
+}
 
 // Translate only untouched sample fields; user-authored input must survive a language switch.
 export function translateTemplateEdits(templateId, from, to, state, drafts) {

@@ -1,6 +1,6 @@
 import { TYPES, LABELS, assemble, requestPlan, readAnswer, parseJSON, retryDelay, runPlan, criteriaRows, criteriaFromForm, validatePayload } from "./core.js";
 
-import { TEMPLATES, TEMPLATE_ORDER, translateTemplateEdits } from "./presets.js";
+import { TEMPLATES, TEMPLATE_ORDER, stateForCustom, translateTemplateEdits } from "./presets.js";
 import { EN, getLocale, setLocale, tr } from "./i18n.js";
 
 const $ = (id) => document.getElementById(id);
@@ -48,7 +48,7 @@ function renderStaticText() {
 }
 function renderTemplateOptions() {
   const selected = $("scenario-select").value || currentPreset;
-  $("scenario-select").replaceChildren(...TEMPLATE_ORDER.map((id) => {
+  $("scenario-select").replaceChildren(...["custom", ...TEMPLATE_ORDER].map((id) => {
     const option = document.createElement("option");
     option.value = id;
     option.textContent = TEMPLATES[id][getLocale()].title;
@@ -63,6 +63,7 @@ function renderTemplateInfo() {
   if (!template) return;
   $("template-title").textContent = template.title;
   $("template-summary").textContent = template.summary;
+  $("template-judgments").hidden = $("scenario-select").value === "custom";
   for (const type of TYPES) $(`template-${type}`).textContent = template.drafts[type].instructions;
 }
 function mergeTemplateLanguage(from, to) {
@@ -238,12 +239,28 @@ function changed() {
 function loadExample(name, notify = true) {
   const example = TEMPLATES[name]?.[getLocale()];
   if (!example) return;
+  const previousText = $("state-input").value;
+  const customText = name === "custom" ? stateForCustom(currentPreset, getLocale(), previousText, loadedProposal?.text) : null;
+  const clearedSample = name === "custom" && customText !== previousText;
   currentPreset = name;
   drafts = structuredClone(example.drafts);
-  if (name !== "feasibility") { $("state-input").value = example.state; contentRevision++; loadedProposal = null; }
+  $("scenario-select").value = name;
+  renderTemplateInfo();
+  if (name !== "feasibility" && name !== "custom") { $("state-input").value = example.state; contentRevision++; loadedProposal = null; }
+  if (name === "custom") {
+    if (clearedSample) { $("state-input").value = customText; contentRevision++; }
+    loadedProposal = null;
+    records = [];
+    lastRun = null;
+    for (const type of TYPES) results[type] = { status: "idle" };
+    $("results-status").textContent = tr("等待首次请求");
+    $("metric-latency").textContent = "—";
+    if (serviceVerified) $("run-status").textContent = tr("可以运行当前问题或全部 3 个问题。");
+    updateRaw();
+  }
   selectType(activeType);
   changed();
-  if (notify) toast(tr(name === "feasibility" ? "可行性问题已载入，正文保持不变。" : "文本示例和问题已载入。"));
+  if (notify) toast(tr(name === "custom" ? clearedSample ? "自定义问题已新建，示例正文已清空。" : "自定义问题已新建，正文保持不变。" : name === "feasibility" ? "可行性问题已载入，正文保持不变。" : "文本示例和问题已载入。"));
 }
 
 async function loadProposal(notify = true) {
@@ -454,7 +471,7 @@ function rawEnvelope() {
 }
 
 function updateRaw() {
-  $("response-json").textContent = records.length ? pretty(rawEnvelope()) : tr("请求正在进行，等待响应…");
+  $("response-json").textContent = records.length ? pretty(rawEnvelope()) : tr(activeController ? "请求正在进行，等待响应…" : "运行请求后，真实响应会显示在这里。");
   $("response-count").textContent = getLocale() === "en" ? `${records.length} HTTP requests finished` : `${records.length} 个 HTTP 请求已结束`;
   $("copy-response").disabled = records.length === 0;
   $("export-results").disabled = records.length === 0;
@@ -617,6 +634,10 @@ $("model-input").addEventListener("input", changed);
 $("language-select").addEventListener("change", () => changeLanguage($("language-select").value));
 $("scenario-select").addEventListener("change", renderTemplateInfo);
 $("load-example").addEventListener("click", () => loadExample($("scenario-select").value));
+$("new-custom").addEventListener("click", () => {
+  loadExample("custom");
+  $(!$("state-input").value.trim() ? "state-input" : "instructions-input").focus();
+});
 $("load-proposal").addEventListener("click", () => { void loadProposal(); });
 $("reset-question").addEventListener("click", () => { drafts[activeType] = structuredClone(TEMPLATES[currentPreset][getLocale()].drafts[activeType]); selectType(activeType); changed(); });
 $("criteria-mode").addEventListener("change", () => {

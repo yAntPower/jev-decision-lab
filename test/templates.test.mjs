@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { assemble } from "../dist/core.js";
 import { EN, getLocale, setLocale } from "../dist/i18n.js";
-import { TEMPLATES, TEMPLATE_ORDER, translateTemplateEdits } from "../dist/presets.js";
+import { TEMPLATES, TEMPLATE_ORDER, stateForCustom, translateTemplateEdits } from "../dist/presets.js";
 
 test("every bilingual template assembles three distinct, valid Jev judgments", () => {
   assert.equal(TEMPLATE_ORDER.length, 12);
@@ -52,6 +52,29 @@ test("language changes translate sample fields while preserving user edits", () 
   assert.equal(translateTemplateEdits("support", "zh", "en", original.state, original.drafts).state, TEMPLATES.support.en.state);
 });
 
+test("custom judgment starts blank and can run one question without the other drafts", () => {
+  const drafts = structuredClone(TEMPLATES.custom.en.drafts);
+  assert.equal(TEMPLATES.custom.en.state, "");
+  assert.deepEqual(Object.values(drafts).map((draft) => draft.instructions), ["", "", ""]);
+  drafts.noul.instructions = "Does the input explicitly mention a deadline?";
+  const state = "The delivery deadline is Friday.";
+  const payload = assemble({ stateText: state, stateFormat: "text", model: "jev-latest", drafts }, ["noul"]);
+  assert.equal(payload.state, state);
+  assert.deepEqual(Object.keys(payload.questions), ["custom_noul"]);
+  assert.equal(payload.questions.custom_noul.criteria, undefined);
+  const translated = translateTemplateEdits("custom", "en", "zh", state, drafts);
+  assert.equal(translated.state, state);
+  assert.equal(translated.drafts.noul.instructions, drafts.noul.instructions);
+});
+
+test("new custom clears untouched examples but keeps user-authored text", () => {
+  const sample = TEMPLATES.support.en.state;
+  assert.equal(stateForCustom("support", "en", sample), "");
+  assert.equal(stateForCustom("support", "en", `${sample}\nMy note`), `${sample}\nMy note`);
+  assert.equal(stateForCustom("support", "en", "My own question"), "My own question");
+  assert.equal(stateForCustom("feasibility", "en", "Proposal sample", "Proposal sample"), "");
+});
+
 test("English is the source-page default and Chinese remains selectable", async () => {
   const html = await readFile(new URL("../dist/index.html", import.meta.url), "utf8");
   const privacy = await readFile(new URL("../dist/privacy.html", import.meta.url), "utf8");
@@ -63,6 +86,8 @@ test("English is the source-page default and Chinese remains selectable", async 
   assert.doesNotMatch(html, /[\p{Script=Han}]/u);
   assert.match(privacy, /<html lang="en">/);
   assert.match(privacy, /<section class="panel" id="chinese" hidden>/);
+  assert.match(html, /id="new-custom"[^>]*>New custom<\/button>/);
+  assert.equal(EN["新建自定义"], "New custom");
   assert.match(readme, /^# Jev Decision Lab\n\n\*\*English\*\* · \[简体中文\]\(README\.zh-CN\.md\)\n\n/);
   assert.match(readmeZh, /^# Jev Decision Lab\n\n\[English\]\(README\.md\) · \*\*简体中文\*\*\n\n/);
   assert.equal(getLocale(), "en");

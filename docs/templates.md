@@ -6,6 +6,8 @@
 
 页面提供 12 个可编辑示例。每个模板将同一份正文作为 State，分别提出三个独立问题：Choice 选一个类别或动作，Noul 判断一个条件成立的概率，Score 按有序等级评分。模板只是问题设置，不会替使用者执行退款、发布或封禁。结果应通过真实数据和确定性规则复核。
 
+如需评估表中没有的问题，点击页面上的“新建自定义”。它保留自己写的正文、清除未修改的示例正文，并清空三个问题及其标准；填写并单独运行所需的一种类型即可。选择“自定义评估”并点击“应用”也能进入同一模式。
+
 | 模板 | Choice | Noul | Score |
 | --- | --- | --- | --- |
 | 项目验证阶段 | 下一步验证阶段 | 最小演示能否做出 | 客户与付费证据强度 |
@@ -26,6 +28,8 @@
 ## English
 
 The page includes 12 editable examples. Each sends the same text as State and asks three independent questions: Choice selects a category or action, Noul gives the probability of one yes/no condition, and Score rates an ordered degree. Templates configure judgments; they do not execute refunds, releases or blocks. Check outputs against real data and deterministic rules.
+
+For a question outside these examples, click **New custom**. This keeps your own text, clears an untouched sample and starts with blank questions and criteria. Fill and run just the judgment type you need. Selecting **Custom judgment** and clicking **Apply** opens the same mode.
 
 | Template | Choice | Noul | Score |
 | --- | --- | --- | --- |

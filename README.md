@@ -30,11 +30,13 @@ For another port, use `PORT=8788 npm start` on Linux/macOS, or first set `$env:P
 
 1. Wait for the service-ready status.
 2. Paste text or Markdown; JSON input is not required.
-3. Edit questions, options and score levels. Advanced JSON editing is optional.
+3. Choose **New custom** for blank questions. Your own text is kept; an untouched sample is cleared. Or apply an example template. Edit questions, options and score levels; advanced JSON is optional.
 4. Run one question type, or all three in combined/concurrent mode.
 5. Inspect, copy or download results.
 
 Use the top-right control to switch between English and Simplified Chinese. All fixed interface text, 12 judgment templates and the fictional proposal sample have both language versions. The templates cover project validation, support and bug triage, model and tool routing, an agent's next step, RAG passage selection, citation support, candidate-value selection, release changes, input guarding and documentation changes. Switching languages translates untouched sample fields while preserving edited content, questions and criteria. Choice / Noul / Score have separate judgments in each template; see the [template guide](docs/templates.md).
+
+Custom judgments can ask questions outside the examples. Run a single Choice, Noul or Score question without filling the other two. Jev returns a typed choice, yes-probability or ordered score, not a free-form report.
 
 Model judgments are not independent fact-checking, release approval or real-world success probabilities. Private proposals, real assessment records and personal analysis scripts are excluded from source releases.
 
